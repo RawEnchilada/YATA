@@ -10,4 +10,5 @@
     <string name="edit_todo">Edit Todo</string>
     <string name="status">Status</string>
     <string name="switch_theme">Switch Theme</string>
+    <string name="sharedPrefsTheme">PreferredTheme</string>
 </resources>

@@ -93,6 +93,7 @@ class Todo (
 
     fun cancelNotification(){
         notification?.cancel()
+        notification = null
     }
 
 

@@ -1,5 +1,3 @@
-# Built application files
-/*/build/
 *.iml
 .gradle
 /local.properties

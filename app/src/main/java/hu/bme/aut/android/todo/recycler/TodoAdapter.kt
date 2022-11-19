@@ -34,6 +34,7 @@ class TodoAdapter(private val listener: TodoDialogListener) : RecyclerView.Adapt
                     holder.binding.description.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             }
             else{
+                todo.showNotification()
                 todo.status = StatusEnum.Active
                 holder.binding.description.paintFlags =
                     holder.binding.description.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()

@@ -43,11 +43,18 @@ class MainActivity : AppCompatActivity(), TodoDialogListener {
                 "NewTodoItemDialog"
             )
         }
+        val preferences = getPreferences(Context.MODE_PRIVATE)
+        val theme = preferences.getInt(getString(R.string.sharedPrefsTheme),AppCompatDelegate.MODE_NIGHT_NO)
+        setAppTheme(theme)
 
         registerReceiver(todoMarkedDoneReceiver, IntentFilter(OnClearReceiver.TODO_DONE))
 
         initRecyclerView()
+    }
+    override fun onCreated(description: String) {
 
+        val todo = Todo(this,description)
+        adapter.attachTodo(todo)
     }
 
     override fun onDestroy() {
@@ -62,10 +69,12 @@ class MainActivity : AppCompatActivity(), TodoDialogListener {
 
     override fun onOptionsItemSelected(item:MenuItem) = when(item.itemId) {
         R.id.actionThemeSwitch ->{
-            if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            val preferences = getPreferences(Context.MODE_PRIVATE)
+            val theme = preferences.getInt(getString(R.string.sharedPrefsTheme),AppCompatDelegate.MODE_NIGHT_NO)
+            if(theme == AppCompatDelegate.MODE_NIGHT_NO) {
+                setAppTheme(AppCompatDelegate.MODE_NIGHT_YES)
             }else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                setAppTheme(AppCompatDelegate.MODE_NIGHT_NO)
             }
             true
         }
@@ -78,11 +87,14 @@ class MainActivity : AppCompatActivity(), TodoDialogListener {
         adapter.refreshTodos()
     }
 
-
-
-    override fun onCreated(description: String) {
-        val todo = Todo(this,description)
-        adapter.attachTodo(todo)
+    fun setAppTheme(enum: Int){
+        val preferences = getPreferences(Context.MODE_PRIVATE)
+        with (preferences.edit()) {
+            putInt(getString(R.string.sharedPrefsTheme), enum)
+            apply()
+        }
+        AppCompatDelegate.setDefaultNightMode(enum)
+        delegate.applyDayNight()
     }
 
     override fun onEdited(todo:Todo,description: String, status: StatusEnum) {
