@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">todo</string>
+    <string name="add_todo">Add todo</string>
+    <string name="v_todo_description">TextView</string>
+    <string name="delete_todo">Delete Todo</string>
+    <string name="description">Description</string>
+    <string name="new_todo">New Todo</string>
+    <string name="button_ok">Add</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="edit_todo">Edit Todo</string>
+    <string name="status">Status</string>
+    <string name="switch_theme">Switch Theme</string>
+</resources>
