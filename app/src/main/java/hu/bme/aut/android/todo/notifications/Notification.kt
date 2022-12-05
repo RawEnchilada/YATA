@@ -38,7 +38,8 @@ class Notification(
             action = "NOTIFICATION_CLEARED"
             putExtra("todoId",todo.id)
         }
-        val onClearPendingIntent = PendingIntent.getBroadcast(ctx,0,onClearIntent,PendingIntent.FLAG_UPDATE_CURRENT + PendingIntent.FLAG_IMMUTABLE)
+        val onClearPendingIntent = PendingIntent.getBroadcast(ctx,
+            todo.id.toInt(),onClearIntent,PendingIntent.FLAG_ONE_SHOT + PendingIntent.FLAG_IMMUTABLE)
 
         val onClickIntent = Intent(ctx, MainActivity::class.java)
         val onClickPendingIntent = PendingIntent.getActivity(ctx,0,onClickIntent,PendingIntent.FLAG_IMMUTABLE)
